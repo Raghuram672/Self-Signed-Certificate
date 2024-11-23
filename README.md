@@ -16,6 +16,18 @@ First, generate a root certificate authority (CA) key and certificate. The CA ce
 openssl genpkey -algorithm RSA -out rootCA.key -aes256
 openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.pem
 ```
+- **When you run the first command, it may ask for a passphrase. Keep it simple and remember it, as you'll need it later.**
+  
+- **When you run the second command, OpenSSL will prompt you to enter several details for the root certificate. These fields are used to describe the root certificate authority (CA). Here’s what each prompt means, along with suggestions for what to enter:**
+
+- Country Name (2 letter code): Enter your country code (e.g., IN for india).
+- State or Province Name (full name): Enter the full name of your state or province (e.g., Karnataka).
+- Locality Name (e.g., city): Enter your city (e.g., Bangalore).
+- Organization Name (e.g., company): Enter your organization’s name (e.g., Random Access Ram).
+- Organizational Unit Name (e.g., section): Enter the department or unit name (e.g., IT Department), or leave blank if none.
+- Common Name (e.g., server FQDN or YOUR name): Enter a unique name for the CA (e.g., MyCompany Root CA or localhost).
+- Email Address: Optionally, enter an email address, or leave blank if not required.
+
 
 ### 2. Generate the Server Key
 
@@ -51,6 +63,7 @@ subjectAltName = @alt_names
 [ alt_names ]
 DNS.1 = localhost
 ```
+
 ### 4. Generate a Server Certificate Signing Request (CSR)
 
 Now, create a certificate signing request (CSR) for the server, using the openssl.cnf file for configuration.
@@ -58,6 +71,15 @@ Now, create a certificate signing request (CSR) for the server, using the openss
 ```bash
 openssl req -new -key server.key -out server.csr -config openssl.cnf
 ```
+- **When you run the command to generate the server.csr, OpenSSL will prompt you to enter information related to the server's identity. Here's what each prompt means, along with suggestions for what to enter:**
+
+- Country Name (2 letter code): Enter your country code (e.g., IN for india).
+- State or Province Name (full name): Enter the full name of your state or province (e.g., Karnataka).
+- Locality Name (e.g., city): Enter your city (e.g., Bangalore).
+- Organization Name (e.g., company): Enter your organization’s name (e.g., org).
+- Organizational Unit Name (e.g., section): Enter the department or unit name (e.g., IT Department), or leave blank if none.
+- Common Name (e.g., server FQDN or YOUR name): Enter a unique name for the CA (e.g., localhost or mydomain.com).
+- Email Address: Optionally, enter an email address, or leave blank if not required.
 
 ### 5. Sign the Server CSR with the Root CA
 
