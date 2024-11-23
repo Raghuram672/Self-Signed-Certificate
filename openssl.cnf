@@ -1,0 +1,19 @@
+[ req ]
+default_bits       = 2048
+default_keyfile    = server.key
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext   # This line references req_ext for SANs
+
+[ req_distinguished_name ]
+countryName                 = Country Name (2 letter code)
+countryName_default         = US
+stateOrProvinceName         = State or Province Name (full name)
+localityName                = Locality Name (e.g., city)
+organizationalUnitName      = Organizational Unit Name (e.g., section)
+commonName                  = Common Name (e.g., server FQDN or YOUR name)
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = localhost
